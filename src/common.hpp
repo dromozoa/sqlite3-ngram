@@ -5,10 +5,11 @@
 #include <iostream>
 #include <string>
 
-#define LOG_IMPL(name) stream_wrapper{&std::cout}
-#define LOG(name) LOG_IMPL(name)
-#define DLOG(name) LOG_IMPL(name)
-#define CHECK(name) LOG_IMPL(name)
+#define DLOG(key) stream_wrapper{}
+#define LOG(key) LOG_##key
+#define LOG_INFO stream_wrapper{&std::cout}
+#define LOG_ERROR stream_wrapper{&std::cerr}
+#define LOG_FATAL stream_wrapper{&std::cerr}
 
 class stream_wrapper {
 public:
@@ -36,11 +37,12 @@ private:
   std::ostream* stream_;
 };
 
+#define CHECK(expr) assert((expr))
 #define CHECK_NOTNULL(expr) assert((expr) != nullptr)
 #define CHECK_EQ(a, b) assert((a) == (b))
 #define CHECK_NE(a, b) assert((a) != (b))
-#define CHECK_GE(a, b) assert((a) >= (b))
 #define CHECK_LT(a, b) assert((a) < (b))
+#define CHECK_GE(a, b) assert((a) >= (b))
 
 namespace google {
   inline void InitGoogleLogging(const char*) {}

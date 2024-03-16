@@ -83,7 +83,7 @@ namespace ngram_tokenizer {
 
     // Call only after a successful call of tokenize()
     const std::vector<Token> &TokenVector::get_tokens() const {
-        CHECK(ok) << "Make sure tokenize() has been successfully called";
+        CHECK(ok);
         return tokens;
     }
 
