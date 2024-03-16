@@ -29,8 +29,4 @@ namespace google {
   inline void InstallFailureSignalHandler() {}
 }
 
-#define BUILD_HEAD_COMMIT "(BUILD_HEAD_COMMIT)"
-#define BUILD_USER "(BUILD_USER)"
-#define BUILD_TIMESTAMP "(BUILD_TIMESTAMP)"
-
 #endif
