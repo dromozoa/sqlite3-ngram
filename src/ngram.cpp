@@ -6,17 +6,24 @@
  */
 
 #include <cstring>
+#ifndef DROMOZOA_NO_GOOGLE_LOGGING
 #include <glog/logging.h>
+#else
+#include "common.hpp"
+#endif
 #include <iostream>
+#include <sstream>
 #include <algorithm>
 
-#include "sqlite/sqlite3ext.h"      /* Do not use <sqlite3.h>! */
+#include "sqlite3ext.h"      /* Do not use <sqlite3.h>! */
 
 SQLITE_EXTENSION_INIT1
 
 #include "utils.h"
 #include "token_vector.h"
+#ifndef DROMOZOA_NO_HIGHRIGHT
 #include "highlight.h"
+#endif
 
 /**
  * [qt.]
@@ -354,8 +361,10 @@ int sqlite3_ngram_init(
     CHECK_EQ(pFts5Api->iVersion, 2);
 
     int rc = pFts5Api->xCreateTokenizer(pFts5Api, LIBNAME, (void *) pFts5Api, &token_handle, nullptr);
+#ifndef DROMOZOA_NO_HIGHRIGHT
     if (rc == SQLITE_OK) {
         rc = pFts5Api->xCreateFunction(pFts5Api, LIBNAME "_highlight", pFts5Api, ngram_highlight, nullptr);
     }
+#endif
     return rc;
 }

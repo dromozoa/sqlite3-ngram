@@ -1,7 +1,11 @@
 #include "token_vector.h"
 
 #include <cctype>
+#ifndef DROMOZOA_NO_GOOGLE_LOGGING
 #include <glog/logging.h>
+#else
+#include "common.hpp"
+#endif
 #include <iostream>
 #include <utility>
 
