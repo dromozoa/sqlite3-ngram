@@ -2,10 +2,11 @@
 #define DROMOZOA_COMMON_HPP
 
 #include <assert.h>
+#include <stdlib.h>
 #include <iostream>
 #include <string>
 
-#define DLOG(key) stream_wrapper{}
+#define DLOG(key) stream_wrapper{nullptr}
 #define LOG(key) LOG_##key
 #define LOG_INFO stream_wrapper{&std::cout}
 #define LOG_ERROR stream_wrapper{&std::cerr}
@@ -13,8 +14,16 @@
 
 class stream_wrapper {
 public:
-  explicit stream_wrapper(std::ostream* stream = nullptr)
-    : stream_(stream) {}
+  explicit stream_wrapper(std::ostream* stream)
+    : stream_() {
+
+    if (const char* DROMOZOA_LOGGING = getenv("DROMOZOA_LOGGING")) {
+      std::string v = DROMOZOA_LOGGING;
+      if (v != "" && v != "0") {
+        stream_ = stream;
+      }
+    }
+  }
 
   stream_wrapper(const stream_wrapper&) = delete;
   stream_wrapper& operator=(const stream_wrapper&) = delete;
