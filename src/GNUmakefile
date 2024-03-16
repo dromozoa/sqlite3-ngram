@@ -15,9 +15,6 @@ LDLIBS += -lsqlite3 -ldl
 OBJS = ngram.o utils.o token_vector.o
 TARGET = libngram.so
 
-# -bundle -undefined dynamic_lookup -all_load
-# -lsqlite3 -lpthread -ldl -o sqlite3.so
-
 $(TARGET): $(OBJS)
 	$(CXX) $(LDFLAGS) $(LIBFLAG) $^ $(LDLIBS) -o $@
 
