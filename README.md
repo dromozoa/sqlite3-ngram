@@ -55,7 +55,7 @@ sqlite> select * from ft_vocab where cnt > 1 order by cnt desc;
 スは|2|2
 ```
 
-```sql
+```
 sqlite> -- ランク付きで検索する。
 sqlite> select bm25(ft), text from ft where ft match '"メロス"' order by bm25(ft);
 -1.3134328358209e-06|メロスは激怒した。
