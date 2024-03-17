@@ -17,7 +17,7 @@ cp libngram.so 好きな場所♡
 
 ## 使い方
 
-```
+```sql
 -- macOSに入っているsqlite3はSQLITE_OMIT_LOAD_EXTENSIONなので注意！
 .load libngram.so
 create virtual table ft using fts5(entry, title, text, tokenize = "ngram");
