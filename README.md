@@ -10,7 +10,7 @@ SQLite3の[FTS5](https://sqlite.org/fts5.html)でbigramが使えるようにな�
 
 ## ビルド
 
-```sh
+```
 cd src
 make
 cp libngram.so 好きな場所♡
@@ -18,7 +18,7 @@ cp libngram.so 好きな場所♡
 
 SQLite3が標準的な場所にない場合は`CPPFLAGS`と`LDFLAGS`を設定します。
 
-```sh
+```
 cd src
 env CPPFLAGS="-I'SQLite3のヘッダがあるディレクトリ'" \
     LDFLAGS="-L'SQLite3のライブラリがあるディレクトリ'" \
@@ -28,7 +28,7 @@ cp libngram.so 好きな場所♡
 
 ## 使い方
 
-```sql
+```
 sqlite> -- macOSに入っているsqlite3はSQLITE_OMIT_LOAD_EXTENSIONなので注意！
 sqlite> .load libngram.so
 sqlite> create virtual table ft using fts5(text, tokenize = 'ngram');
@@ -40,7 +40,7 @@ sqlite> insert into ft values('メロスは、村の牧人である。笛を吹�
 sqlite> insert into ft values('けれども邪悪に対しては、人一倍に敏感であった。');
 ```
 
-```sql
+```
 sqlite> -- 良く出てきたbigramを調べる。
 sqlite> select * from ft_vocab where cnt > 1 order by cnt desc;
 た。|4|4
